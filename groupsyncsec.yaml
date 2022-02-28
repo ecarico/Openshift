@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ldap-group-sync
+  namespace: group-sync-operator
+type: Opaque 
+data: 
+  username: CN=Active Directory Browser Service,CN=Managed Service Accounts,DC=emaximolab,DC=com 
+  password: SoGIqc3pKLT3o6EpHoGn
+stringData: 
+  hostname: projetech.emaximolab.com

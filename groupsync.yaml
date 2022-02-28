@@ -1,0 +1,35 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: GroupSync
+metadata:
+  name: ldap-groupsync
+  namespace: group-sync-operator
+spec:
+  providers:
+    - ldap:
+        credentialsSecret:
+          name: ldap-group-sync
+          namespace: group-sync-operator
+        insecure: true
+        rfc2307:
+          groupMembershipAttributes:
+            - member
+          groupNameAttributes:
+            - cn
+          groupUIDAttribute: dn
+          groupsQuery:
+            baseDN: 'OU=Groups,OU=EmaximoLab,DC=emaximolab,DC=com'
+            derefAliases: never
+            filter: (objectClass=groupofnames)
+            scope: sub
+          userNameAttributes:
+            - sAMAccountName
+          userUIDAttribute: dn
+          usersQuery:
+            baseDN: 'OU=Users,OU=EmaximoLab,DC=emaximolab,DC=com'
+            derefAliases: never
+            scope: sub
+        url: 'ldap://emaximolab.com:389'
+        whitelist:
+          - 'CN=OpenShift-Admins,OU=Groups,OU=EmaximoLab,DC=emaximolab,DC=com'
+      name: ldap
+  schedule: '*/30 * * * *'

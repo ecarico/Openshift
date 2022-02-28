@@ -1,0 +1,52 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  creationTimestamp: null
+  labels:
+    machine.openshift.io/cluster-api-cluster: projetech-xhmwl
+  name: projetech-xhmwl-infra
+  namespace: openshift-machine-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: projetech-xhmwl 
+      machine.openshift.io/cluster-api-machineset: projetech-xhmwl-infra 
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        machine.openshift.io/cluster-api-cluster: projetech-xhmwl
+        machine.openshift.io/cluster-api-machine-role: infra 
+        machine.openshift.io/cluster-api-machine-type: infra 
+        machine.openshift.io/cluster-api-machineset: projetech-xhmwl-infra 
+    spec:
+      metadata:
+        creationTimestamp: null
+        labels:
+          node-role.kubernetes.io/<role>: "" 
+      providerSpec:
+        value:
+          apiVersion: vsphereprovider.openshift.io/v1beta1
+          credentialsSecret:
+            name: vsphere-cloud-credentials
+          diskGiB: 120
+          kind: VSphereMachineProviderSpec
+          memoryMiB: 8192
+          metadata:
+            creationTimestamp: null
+          network:
+            devices:
+            - networkName: "DS-DHCP_Network" 
+          numCPUs: 4
+          numCoresPerSocket: 1
+          snapshot: ""
+          template: projetech-xhmwl-rhcos
+          userDataSecret:
+            name: worker-user-data
+          workspace:
+            datacenter: SJC04 
+            datastore: SJC04_T2_D01
+            folder: /SJC04/vm/projetech-xhmwl
+            resourcePool: /SJC04/host/SJC04-C1/Resources
+            server: ssjcvcsa01.emaximolab.com

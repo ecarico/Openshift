@@ -1,0 +1,26 @@
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+    - ldap:
+        attributes:
+          email:
+            - mail
+          id:
+            - sAMAccountName
+          name:
+            - cn
+          preferredUsername:
+            - sAMAccountName
+        bindDN: >-
+          CN=Active Directory Browser Service,CN=Managed Service
+          Accounts,DC=emaximolab,DC=com
+        bindPassword:
+          name: ldap-bind-password
+        insecure: true
+        url: 'ldap://emaximolab.com/DC=emaximolab,DC=com?sAMAccountName?sub'
+      mappingMethod: claim
+      name: ldap
+      type: LDAP

@@ -1,0 +1,46 @@
+apiVersion: v1
+baseDomain: emaximolab.com
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform:
+    vsphere:
+      cpus: 10
+      coresPerSocket: 2
+      memoryMB: 32768
+      osDisk:
+        diskSizeGB: 300
+  replicas: 3
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: projetech
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  vsphere:
+    apiVIP: 172.16.101.16
+    cluster: SJC04-C1
+    datacenter: SJC04
+    defaultDatastore: SJC04_T2_D01
+    ingressVIP: 172.16.101.17
+    network: DS-DHCP_Network
+    password: QzatCBA8g2ckjqBq
+    username: oservice
+    vCenter: ssjcvcsa01.emaximolab.com
+sshkey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDG4+ZZVOmXVk0QW+6W6URlfk0VkDewHE4z0+HtxBLh4 root@xopenmgr01.emaximolab.com
+publish: External
+pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfODE3YzM4MzUzMmRiNDg1YTkzM2Q5NTUzMjUzOTI2NTE6WU9KWVFXUldFVVZMM1VKSVdHODhEQUU2QUZRVTEyUU5aMjZXMVUzWU5CWEM0TlFEQlFTMVNQN1ZLNU9FSk0wQQ==","email":"ecarico@projetech.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfODE3YzM4MzUzMmRiNDg1YTkzM2Q5NTUzMjUzOTI2NTE6WU9KWVFXUldFVVZMM1VKSVdHODhEQUU2QUZRVTEyUU5aMjZXMVUzWU5CWEM0TlFEQlFTMVNQN1ZLNU9FSk0wQQ==","email":"ecarico@projetech.com"},"registry.connect.redhat.com":{"auth":"fHVoYy1wb29sLTIwMGRjYTc1LWJkMzMtNDhlYi05YzRmLWM0MzI3NmI1Y2ZlMTpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSm1aVEppT0RFNU5EbGlZVGcwT1dFd09EQTVZekJoTnpNM01tRXdNak13WVNKOS5ESVRWX1JnNmpVeVh0R1VrTnUwdnZZSzhhbk8tZVF5R2lxRko2UGdfWlNXYWdvN3gxU2N3VDhybC1CUjVEb3YyZzJ0M0xVcGtVMWUxZzhwNGJVTHdDSUpnLWJpUTRValZuMDNqWHVhb05GMDZKSVlVNEs5bWFTaGZwbE1KOF9yc3FDbjRFa2tXc01Cb0xROWlDc0tSOVo0UkNmTDBIQ0x2dFh4NzJpdlFnMHlmLTBfeTFYYWNWcWFWb20zQnNCNHZlVnJ4bzJ6ZnFlNzUyNUxQS0FncjdBbFR0X1duclVkYjNEQ05LcDJkaDJROWN0YmFDamQtd3I5cDhsTm05VDlGMHZDZ0c5OGQ0cVB1d3RWdWticTVTemV6V1A4YU16UGpTLUh4SDhKY1ZfcGZNNjNMbkZnZGlOTEdHSnIxQWVtREMzUjV1ZUk4YXZCUjk4S0x0aVh3WlRoMmd0R21vZ25aN2QyR185YzJtVGNVbEc5ZTZhZjVaWTRqMkhqTUt6dy1BTWd4TFBDWVRhUkN0Rk9lYmNVV0ZjSDl6c05xdkR2NnBmZVpPOGFwQVNRUHZTdXhnNVlRTXhNRW5pQi1IYkQwNFkwdmtVODF5dmxuX0k2T2lLN2QxRkd6Qkpid3BlSDd0czhXUVB5SHkza1lPTEVwdF9kSWZreW9yRTJna2tDeWZvYi03eGROWHNFUWp0NG8ySTlNWTE3Nkt3UlBON2k4M2hUYnB4ejJiOHVMcmZiWkpLanhJOHZrQ3Byb3FVbTdUV1BnSV9rUXF4NzhsNVdmSjdYVEs0ZE9YaFJwUkVkRk0yejhDaEo1dmtINmNHeGJBR2RGTVlMbndWTHFpSlpWTVcza18wQWN5RTdTaDYzODRCNmFZY1Y5VmJwMkwwaHAyZk5SWlJndzZxRQ==","email":"ecarico@projetech.com"},"registry.redhat.io":{"auth":"fHVoYy1wb29sLTIwMGRjYTc1LWJkMzMtNDhlYi05YzRmLWM0MzI3NmI1Y2ZlMTpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSm1aVEppT0RFNU5EbGlZVGcwT1dFd09EQTVZekJoTnpNM01tRXdNak13WVNKOS5ESVRWX1JnNmpVeVh0R1VrTnUwdnZZSzhhbk8tZVF5R2lxRko2UGdfWlNXYWdvN3gxU2N3VDhybC1CUjVEb3YyZzJ0M0xVcGtVMWUxZzhwNGJVTHdDSUpnLWJpUTRValZuMDNqWHVhb05GMDZKSVlVNEs5bWFTaGZwbE1KOF9yc3FDbjRFa2tXc01Cb0xROWlDc0tSOVo0UkNmTDBIQ0x2dFh4NzJpdlFnMHlmLTBfeTFYYWNWcWFWb20zQnNCNHZlVnJ4bzJ6ZnFlNzUyNUxQS0FncjdBbFR0X1duclVkYjNEQ05LcDJkaDJROWN0YmFDamQtd3I5cDhsTm05VDlGMHZDZ0c5OGQ0cVB1d3RWdWticTVTemV6V1A4YU16UGpTLUh4SDhKY1ZfcGZNNjNMbkZnZGlOTEdHSnIxQWVtREMzUjV1ZUk4YXZCUjk4S0x0aVh3WlRoMmd0R21vZ25aN2QyR185YzJtVGNVbEc5ZTZhZjVaWTRqMkhqTUt6dy1BTWd4TFBDWVRhUkN0Rk9lYmNVV0ZjSDl6c05xdkR2NnBmZVpPOGFwQVNRUHZTdXhnNVlRTXhNRW5pQi1IYkQwNFkwdmtVODF5dmxuX0k2T2lLN2QxRkd6Qkpid3BlSDd0czhXUVB5SHkza1lPTEVwdF9kSWZreW9yRTJna2tDeWZvYi03eGROWHNFUWp0NG8ySTlNWTE3Nkt3UlBON2k4M2hUYnB4ejJiOHVMcmZiWkpLanhJOHZrQ3Byb3FVbTdUV1BnSV9rUXF4NzhsNVdmSjdYVEs0ZE9YaFJwUkVkRk0yejhDaEo1dmtINmNHeGJBR2RGTVlMbndWTHFpSlpWTVcza18wQWN5RTdTaDYzODRCNmFZY1Y5VmJwMkwwaHAyZk5SWlJndzZxRQ==","email":"ecarico@projetech.com"}}}'
