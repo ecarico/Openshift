@@ -24,7 +24,7 @@ spec:
       metadata:
         creationTimestamp: null
         labels:
-          node-role.kubernetes.io/<role>: "" 
+          node-role.kubernetes.io/infra: "" 
       providerSpec:
         value:
           apiVersion: vsphereprovider.openshift.io/v1beta1
@@ -32,13 +32,13 @@ spec:
             name: vsphere-cloud-credentials
           diskGiB: 120
           kind: VSphereMachineProviderSpec
-          memoryMiB: 8192
+          memoryMiB: 16384
           metadata:
             creationTimestamp: null
           network:
             devices:
             - networkName: "DS-DHCP_Network" 
-          numCPUs: 4
+          numCPUs: 8
           numCoresPerSocket: 1
           snapshot: ""
           template: projetech-xhmwl-rhcos
