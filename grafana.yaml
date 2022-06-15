@@ -1,0 +1,25 @@
+kind: Grafana
+apiVersion: integreatly.org/v1alpha1
+metadata:
+  name: grafana
+  namespace: graphana
+spec:
+  config:
+    auth.ldap:
+      config_file: /etc/grafana-configmaps/ldap-config/ldap.toml
+      enabled: true
+    log:
+      level: warn
+      mode: console
+  configMaps:
+    - ldap-config
+  dashboardLabelSelector:
+    - matchExpressions:
+        - key: 'key: app'
+          operator: 'operator: In'
+          values:
+            - 'values: [grafana]'
+  ingress:
+    enabled: true
+    path: /
+    pathType: Prefix
