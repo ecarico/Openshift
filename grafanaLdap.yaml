@@ -1,0 +1,61 @@
+#ldap
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ldap-config
+  namespace: graphana
+  uid: 3dfba88f-983a-4377-af41-26856e357e6b
+  resourceVersion: '17398312'
+  creationTimestamp: '2022-06-14T16:52:54Z'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2022-06-14T16:52:54Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:data':
+          .: {}
+          'f:ldap.toml': {}
+data:
+  ldap.toml: >
+    [[servers]]
+
+    host = "172.16.0.6"
+
+    port = 389
+
+    use_ssl = false
+
+    start_tls = false
+
+    ssl_skip_verify = true
+
+    bind_dn = "CN=Active Directory Browser Service,CN=Managed Service
+    Accounts,DC=emaximolab,DC=com"
+
+    bind_password = 'SoGIqc3pKLT3o6EpHoGn'
+
+    search_filter = "(sAMAccountName=%s)"
+
+    search_base_dns = ["dc=emaximolab,dc=com"]
+
+    [servers.attributes]
+
+    name = "sAMAccountName"
+
+    username = "sAMAccountName"
+
+    member_of = "memberOf"  
+
+    email =  "email"
+
+
+    [[servers.group_mappings]]
+
+    group_dn =
+    "CN=OpenShift-Admins,OU=Groups,OU=EmaximoLab,DC=emaximolab,DC=com"
+
+    org_role = "Admin"  
+
+    grafana_admin = true
